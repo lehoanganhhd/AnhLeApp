@@ -1,5 +1,6 @@
 using System.Text;
 using API.Data;
+using API.Errors;
 using API.Extensions;
 using API.Interfaces;
 using API.Services;
@@ -18,10 +19,11 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
+
 // if (app.Environment.IsDevelopment())
 // {
 //     app.UseSwagger();
